@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-canvas: #f7f7f5;
+  --bg-surface: #ffffff;
+  --bg-raised: #f1f0ec;
+  --ink-primary: #18181b;
+  --ink-secondary: #52525b;
+  --ink-muted: #71717a;
+  --border-line: rgba(24, 24, 27, 0.09);
+  --accent: #c9521d;
+  --accent-hover: #b04516;
+  --accent-soft: rgba(201, 82, 29, 0.1);
+  --success: #15803d;
+  --warning: #b45309;
+  --danger: #b91c1c;
+}
+
+.dark {
+  --bg-canvas: #111214;
+  --bg-surface: #181a1e;
+  --bg-raised: #22252b;
+  --ink-primary: #f4f4f5;
+  --ink-secondary: #a1a1aa;
+  --ink-muted: #71717a;
+  --border-line: rgba(255, 255, 255, 0.08);
+  --accent: #e86a33;
+  --accent-hover: #f27c47;
+  --accent-soft: rgba(232, 106, 51, 0.14);
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+}
+
+@layer base {
+  html {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    color: var(--ink-primary);
+    min-height: 100vh;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,22 @@
+{
+  "name": "trainerdesk",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Production-quality MERN web app for personal gym trainers",
+  "scripts": {
+    "install:all": "npm install && npm --prefix server install && npm --prefix client install",
+    "dev": "concurrently -n server,client -c blue,green \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "test": "npm --prefix server test",
+    "lint": "npm --prefix server run lint && npm --prefix client run lint",
+    "format": "prettier --write \"server/src/**/*.js\" \"client/src/**/*.{js,jsx,css}\"",
+    "seed": "npm --prefix server run seed",
+    "seed:demo": "npm --prefix server run seed:demo"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "prettier": "^3.4.2"
+  }
+}

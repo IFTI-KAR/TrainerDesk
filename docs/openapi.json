@@ -1,0 +1,163 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "TrainerDesk API",
+    "version": "1.0.0",
+    "description": "REST API for TrainerDesk personal training management platform."
+  },
+  "servers": [{ "url": "/api/v1", "description": "Version 1 API" }],
+  "tags": [
+    { "name": "Health" },
+    { "name": "Auth" },
+    { "name": "Exercises" },
+    { "name": "Clients" },
+    { "name": "WorkoutPlans" },
+    { "name": "WorkoutTemplates" },
+    { "name": "ScheduleRules" },
+    { "name": "Sessions" },
+    { "name": "Progress" },
+    { "name": "Foods" },
+    { "name": "DietPlans" },
+    { "name": "DietTemplates" },
+    { "name": "Reports" },
+    { "name": "Reminders" }
+  ],
+  "components": {
+    "securitySchemes": {
+      "cookieAuth": { "type": "apiKey", "in": "cookie", "name": "td_access_token" },
+      "bearerAuth": { "type": "http", "scheme": "bearer", "bearerFormat": "JWT" }
+    }
+  },
+  "paths": {
+    "/health": { "get": { "tags": ["Health"], "summary": "API health check", "responses": { "200": { "description": "OK" } } } },
+    "/auth/register": { "post": { "tags": ["Auth"], "summary": "Register trainer", "responses": { "201": { "description": "Created" } } } },
+    "/auth/login": { "post": { "tags": ["Auth"], "summary": "Login trainer", "responses": { "200": { "description": "OK" } } } },
+    "/auth/refresh": { "post": { "tags": ["Auth"], "summary": "Rotate refresh token", "responses": { "200": { "description": "OK" } } } },
+    "/auth/logout": { "post": { "tags": ["Auth"], "summary": "Logout trainer", "responses": { "200": { "description": "OK" } } } },
+    "/auth/me": {
+      "get": { "tags": ["Auth"], "summary": "Get trainer profile", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "patch": { "tags": ["Auth"], "summary": "Update trainer profile", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } }
+    },
+    "/auth/password": { "patch": { "tags": ["Auth"], "summary": "Change password", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/exercises/meta": { "get": { "tags": ["Exercises"], "summary": "Filter metadata", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/exercises": {
+      "get": { "tags": ["Exercises"], "summary": "List exercises", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "post": { "tags": ["Exercises"], "summary": "Create custom exercise", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } }
+    },
+    "/exercises/{id}": {
+      "get": { "tags": ["Exercises"], "summary": "Get exercise", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "patch": { "tags": ["Exercises"], "summary": "Update custom exercise", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "delete": { "tags": ["Exercises"], "summary": "Delete custom exercise", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } }
+    },
+    "/exercises/{id}/favorite": { "post": { "tags": ["Exercises"], "summary": "Toggle favorite", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/clients/stats": { "get": { "tags": ["Clients"], "summary": "Client stats", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/clients": {
+      "get": { "tags": ["Clients"], "summary": "List clients", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "post": { "tags": ["Clients"], "summary": "Create client", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } }
+    },
+    "/clients/{id}": {
+      "get": { "tags": ["Clients"], "summary": "Get client", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "patch": { "tags": ["Clients"], "summary": "Update client", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "delete": { "tags": ["Clients"], "summary": "Delete client", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } }
+    },
+    "/clients/{id}/notes": { "post": { "tags": ["Clients"], "summary": "Add note", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } } },
+    "/clients/{id}/notes/{noteId}": { "delete": { "tags": ["Clients"], "summary": "Delete note", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/workout-plans": {
+      "get": { "tags": ["WorkoutPlans"], "summary": "List plans", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "post": { "tags": ["WorkoutPlans"], "summary": "Create plan", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } }
+    },
+    "/workout-plans/{id}": {
+      "get": { "tags": ["WorkoutPlans"], "summary": "Get plan", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "patch": { "tags": ["WorkoutPlans"], "summary": "Update plan", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "delete": { "tags": ["WorkoutPlans"], "summary": "Delete plan", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } }
+    },
+    "/workout-plans/{id}/duplicate-day/{dayId}": { "post": { "tags": ["WorkoutPlans"], "summary": "Duplicate day", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/workout-plans/{id}/duplicate": { "post": { "tags": ["WorkoutPlans"], "summary": "Copy plan", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } } },
+    "/workout-plans/{id}/save-as-template": { "post": { "tags": ["WorkoutPlans"], "summary": "Save as template", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } } },
+    "/workout-templates": {
+      "get": { "tags": ["WorkoutTemplates"], "summary": "List templates", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "post": { "tags": ["WorkoutTemplates"], "summary": "Create template", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } }
+    },
+    "/workout-templates/{id}": {
+      "get": { "tags": ["WorkoutTemplates"], "summary": "Get template", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "patch": { "tags": ["WorkoutTemplates"], "summary": "Update template", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "delete": { "tags": ["WorkoutTemplates"], "summary": "Delete template", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } }
+    },
+    "/workout-templates/{id}/assign": { "post": { "tags": ["WorkoutTemplates"], "summary": "Assign template", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } } },
+    "/schedule-rules": {
+      "get": { "tags": ["ScheduleRules"], "summary": "List schedule rules", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "post": { "tags": ["ScheduleRules"], "summary": "Create schedule rule", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } }
+    },
+    "/schedule-rules/{id}": {
+      "patch": { "tags": ["ScheduleRules"], "summary": "Update schedule rule", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "delete": { "tags": ["ScheduleRules"], "summary": "Delete schedule rule", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } }
+    },
+    "/sessions": { "get": { "tags": ["Sessions"], "summary": "List sessions by date or range", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/sessions/week-summary": { "get": { "tags": ["Sessions"], "summary": "Get Mon-Sun counts", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/sessions/one-off": { "post": { "tags": ["Sessions"], "summary": "Create one-off session", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } } },
+    "/sessions/{id}": { "get": { "tags": ["Sessions"], "summary": "Get session", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/sessions/{id}/live": { "get": { "tags": ["Sessions"], "summary": "Get live session & history", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/sessions/{id}/log": { "patch": { "tags": ["Sessions"], "summary": "Log sets & detect PRs", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/sessions/{id}/complete": { "post": { "tags": ["Sessions"], "summary": "Complete session", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/sessions/{id}/status": { "patch": { "tags": ["Sessions"], "summary": "Update status", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/sessions/{id}/reschedule": { "patch": { "tags": ["Sessions"], "summary": "Reschedule session", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/sessions/{id}/cancel": { "post": { "tags": ["Sessions"], "summary": "Cancel session", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/measurements": {
+      "get": { "tags": ["Progress"], "summary": "List client measurements", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "post": { "tags": ["Progress"], "summary": "Create measurement", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } }
+    },
+    "/measurements/{id}": {
+      "patch": { "tags": ["Progress"], "summary": "Update measurement", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "delete": { "tags": ["Progress"], "summary": "Delete measurement", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } }
+    },
+    "/progress-photos": {
+      "get": { "tags": ["Progress"], "summary": "List progress photos", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "post": { "tags": ["Progress"], "summary": "Upload progress photo", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } }
+    },
+    "/progress-photos/{id}": { "delete": { "tags": ["Progress"], "summary": "Delete progress photo", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/progress/{clientId}": { "get": { "tags": ["Progress"], "summary": "Get full progress analytics", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/foods/meta": { "get": { "tags": ["Foods"], "summary": "Get food categories & measures", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/foods": {
+      "get": { "tags": ["Foods"], "summary": "List global & custom foods", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "post": { "tags": ["Foods"], "summary": "Create custom food", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } }
+    },
+    "/foods/{id}": {
+      "patch": { "tags": ["Foods"], "summary": "Update custom food", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "delete": { "tags": ["Foods"], "summary": "Delete custom food", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } }
+    },
+    "/diet-plans/shared/{shareToken}": { "get": { "tags": ["DietPlans"], "summary": "Public read-only shared diet plan", "responses": { "200": { "description": "OK" } } } },
+    "/diet-plans": {
+      "get": { "tags": ["DietPlans"], "summary": "List diet plans", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "post": { "tags": ["DietPlans"], "summary": "Create diet plan", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } }
+    },
+    "/diet-plans/{id}": {
+      "get": { "tags": ["DietPlans"], "summary": "Get diet plan", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "patch": { "tags": ["DietPlans"], "summary": "Update diet plan", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "delete": { "tags": ["DietPlans"], "summary": "Delete diet plan", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } }
+    },
+    "/diet-plans/{id}/duplicate": { "post": { "tags": ["DietPlans"], "summary": "Copy diet plan", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } } },
+    "/diet-plans/{id}/save-as-template": { "post": { "tags": ["DietPlans"], "summary": "Save diet plan as template", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } } },
+    "/diet-templates": {
+      "get": { "tags": ["DietTemplates"], "summary": "List diet templates", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "post": { "tags": ["DietTemplates"], "summary": "Create diet template", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } }
+    },
+    "/diet-templates/{id}": {
+      "get": { "tags": ["DietTemplates"], "summary": "Get diet template", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "patch": { "tags": ["DietTemplates"], "summary": "Update diet template", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "delete": { "tags": ["DietTemplates"], "summary": "Delete diet template", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } }
+    },
+    "/diet-templates/{id}/assign": { "post": { "tags": ["DietTemplates"], "summary": "Assign diet template", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } } },
+    "/reports/dashboard-stats": { "get": { "tags": ["Reports"], "summary": "Studio KPI summary, missed 2+ alerts, expiring memberships", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/reports/attendance": { "get": { "tags": ["Reports"], "summary": "Attendance report by date range and client", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } } },
+    "/reports/export/clients.csv": { "get": { "tags": ["Reports"], "summary": "Download clients CSV", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "text/csv" } } } },
+    "/reports/export/sessions.csv": { "get": { "tags": ["Reports"], "summary": "Download sessions CSV", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "text/csv" } } } },
+    "/reminders": {
+      "get": { "tags": ["Reminders"], "summary": "List trainer reminders", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "post": { "tags": ["Reminders"], "summary": "Create reminder", "security": [{ "cookieAuth": [] }], "responses": { "201": { "description": "Created" } } }
+    },
+    "/reminders/{id}": {
+      "patch": { "tags": ["Reminders"], "summary": "Update or complete reminder", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } },
+      "delete": { "tags": ["Reminders"], "summary": "Delete reminder", "security": [{ "cookieAuth": [] }], "responses": { "200": { "description": "OK" } } }
+    }
+  }
+}
